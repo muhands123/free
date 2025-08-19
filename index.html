@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>موقع الأدوات الذكية - Smart Tools Website</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <!-- شريط التنقل -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-brand">
+                <h1 id="site-title">موقع الأدوات الذكية</h1>
+            </div>
+            <div class="nav-menu">
+                <button class="lang-toggle" onclick="toggleLanguage()">
+                    <i class="fas fa-globe"></i>
+                    <span id="lang-text">EN</span>
+                </button>
+                <div class="user-info" id="user-info">
+                    <span id="user-points">0 نقطة</span>
+                    <button class="login-btn" onclick="showLoginModal()">تسجيل الدخول</button>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- القسم الرئيسي -->
+    <main class="main-content">
+        <!-- قسم الترحيب -->
+        <section class="hero-section">
+            <div class="container">
+                <h2 id="welcome-title">مرحباً بكم في موقع الأدوات الذكية</h2>
+                <p id="welcome-desc">اكتشف مجموعة رائعة من الأدوات الذكية واجمع النقاط لفتح المزيد من المزايا</p>
+            </div>
+        </section>
+
+        <!-- لوحة المتصدرين -->
+        <section class="leaderboard-section">
+            <div class="container">
+                <h3 id="leaderboard-title">لوحة المتصدرين</h3>
+                <div class="leaderboard" id="leaderboard">
+                    <!-- سيتم ملؤها بواسطة JavaScript -->
+                </div>
+            </div>
+        </section>
+
+        <!-- قسم الأدوات -->
+        <section class="tools-section">
+            <div class="container">
+                <h3 id="tools-title">الأدوات المتاحة</h3>
+                <div class="tools-grid" id="tools-grid">
+                    <!-- سيتم ملؤها بواسطة JavaScript -->
+                </div>
+            </div>
+        </section>
+
+        <!-- قسم المنشورات -->
+        <section class="posts-section">
+            <div class="container">
+                <h3 id="posts-title">المنشورات اليومية</h3>
+                <div class="posts-grid" id="posts-grid">
+                    <!-- سيتم ملؤها بواسطة JavaScript -->
+                </div>
+            </div>
+        </section>
+
+        <!-- لعبة الدودة -->
+        <section class="game-section">
+            <div class="container">
+                <h3 id="game-title">لعبة الدودة</h3>
+                <div class="game-container">
+                    <canvas id="snake-game" width="400" height="400"></canvas>
+                    <div class="game-controls">
+                        <button onclick="startGame()" id="start-game-btn">ابدأ اللعبة</button>
+                        <div class="game-score">النتيجة: <span id="game-score">0</span></div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- قسم التعليقات -->
+        <section class="comments-section">
+            <div class="container">
+                <h3 id="comments-title">التعليقات</h3>
+                <div class="comment-form">
+                    <textarea id="comment-text" placeholder="اكتب تعليقك هنا..."></textarea>
+                    <button onclick="addComment()" id="add-comment-btn">إضافة تعليق</button>
+                </div>
+                <div class="comments-list" id="comments-list">
+                    <!-- سيتم ملؤها بواسطة JavaScript -->
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- الفوتر -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h4 id="support-title">ادعمنا</h4>
+                    <button class="support-btn" onclick="showSupportModal()">
+                        <i class="fas fa-heart"></i>
+                        <span id="support-btn-text">ادعمني</span>
+                    </button>
+                </div>
+                <div class="footer-section">
+                    <h4 id="external-links-title">روابط خارجية</h4>
+                    <div class="external-links" id="external-links">
+                        <!-- سيتم ملؤها بواسطة JavaScript -->
+                    </div>
+                </div>
+                <div class="footer-section">
+                    <p id="copyright">&copy; 2024 موقع الأدوات الذكية. جميع الحقوق محفوظة.</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- نوافذ منبثقة -->
+    <!-- نافذة تسجيل الدخول -->
+    <div class="modal" id="login-modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal('login-modal')">&times;</span>
+            <h3 id="login-title">تسجيل الدخول</h3>
+            <form id="login-form">
+                <input type="text" id="username" placeholder="اسم المستخدم" required>
+                <input type="email" id="email" placeholder="البريد الإلكتروني" required>
+                <button type="submit">دخول</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- نافذة الدعم -->
+    <div class="modal" id="support-modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal('support-modal')">&times;</span>
+            <h3 id="support-modal-title">ادعم الموقع</h3>
+            <p id="support-desc">ساعدنا في تطوير الموقع وإضافة المزيد من الأدوات</p>
+            <div class="support-methods">
+                <button class="support-method">PayPal</button>
+                <button class="support-method">Patreon</button>
+                <button class="support-method">Ko-fi</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- نافذة الأدوات -->
+    <div class="modal tool-modal" id="tool-modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeToolModal()">&times;</span>
+            <div id="tool-content">
+                <!-- سيتم ملؤها بواسطة JavaScript حسب الأداة المختارة -->
+            </div>
+        </div>
+    </div>
+
+    <!-- تحميل ملفات JavaScript -->
+    <script src="data.js"></script>
+    <script src="auth.js"></script>
+    <script src="language.js"></script>
+    <script src="tools/smart-titles.js"></script>
+    <script src="tools/task-manager.js"></script>
+    <script src="tools/smart-emoji.js"></script>
+    <script src="tools/advanced-titles.js"></script>
+    <script src="tools/profile-image.js"></script>
+    <script src="snake-game.js"></script>
+    <script src="comments.js"></script>
+    <script src="main.js"></script>
+</body>
+</html>
+
